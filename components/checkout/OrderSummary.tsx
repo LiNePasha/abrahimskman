@@ -6,7 +6,17 @@ import { useCheckoutStore } from '@/store/checkoutStore'
 import { calculateWalletFee, getWalletFeeInfo } from '@/lib/utils/fees'
 import type { CartItem } from '@/types'
 
-export default function OrderSummary() {
+interface OrderSummaryProps {
+  isHalfPayment?: boolean
+  halfPaymentAmount?: number
+  remainingAmount?: number
+}
+
+export default function OrderSummary({
+  isHalfPayment = false,
+  halfPaymentAmount,
+  remainingAmount = 0,
+}: OrderSummaryProps) {
   const { cartItems, totalPrice } = useCartStore()
   const shippingMethod = useCheckoutStore(
     (state) => state.checkoutData.shippingMethod
@@ -19,11 +29,14 @@ export default function OrderSummary() {
   
   // Calculate wallet fee (Instapay): 3% with min 5 EGP and max 30 EGP
   // Applied ONLY on order total (not on shipping - shipping is paid COD)
-  const walletFee = paymentMethod?.id === 'instapay' ? calculateWalletFee(totalPrice) : 0
+  const payableNow = isHalfPayment
+    ? (halfPaymentAmount ?? Math.round(totalPrice / 2))
+    : totalPrice
+  const walletFee = paymentMethod?.id === 'instapay' ? calculateWalletFee(payableNow) : 0
   const walletFeeInfo = getWalletFeeInfo()
   
   // Grand total = Order total + Wallet fee (Shipping is separate - paid on delivery)
-  const grandTotal = totalPrice + walletFee
+  const grandTotal = payableNow + walletFee
   
   return (
     <div className="p-6 bg-white rounded-xl shadow-soft">
@@ -83,11 +96,20 @@ export default function OrderSummary() {
       <div className="space-y-3">
         {/* Subtotal */}
         <div className="flex justify-between text-sm">
-          <span className="text-gray-600">المجموع الفرعي</span>
+          <span className="text-gray-600">{isHalfPayment ? 'المبلغ المطلوب الآن' : 'المجموع الفرعي'}</span>
           <span className="font-medium text-gray-900">
-            {Math.round(totalPrice)} جنيه
+            {Math.round(payableNow)} جنيه
           </span>
         </div>
+
+        {isHalfPayment && remainingAmount > 0 && (
+          <div className="flex justify-between text-sm">
+            <span className="text-gray-600">المتبقي عند الاستلام</span>
+            <span className="font-medium text-gray-900">
+              {Math.round(remainingAmount)} جنيه
+            </span>
+          </div>
+        )}
         
         {/* Wallet Fee (Instapay) - Only on order total */}
         {walletFee > 0 && (

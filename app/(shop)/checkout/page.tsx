@@ -1005,7 +1005,6 @@ export default function CheckoutPage() {
                       id: 'store_pickup',
                       title: 'استلام من المتجر',
                       cost: 0,
-                      deliveryType: 'store_pickup',
                     }
                     useCheckoutStore.setState((state) => ({
                       checkoutData: {

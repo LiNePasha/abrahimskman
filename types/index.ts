@@ -557,6 +557,7 @@ export interface PaginatedResponse<T> {
 
 export interface CheckoutData {
   step: 'cart' | 'address' | 'shipping' | 'payment' | 'review'
+  deliveryType?: 'home_delivery' | 'store_pickup'
   cartItems: CartItem[]
   shippingAddress: ShippingAddress | null
   billingAddress: BillingAddress | null

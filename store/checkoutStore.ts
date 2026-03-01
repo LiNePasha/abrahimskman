@@ -48,6 +48,7 @@ interface CheckoutStore {
 
 const initialCheckoutData: CheckoutData = {
   step: 'address',
+  deliveryType: 'home_delivery',
   cartItems: [],
   shippingAddress: null,
   billingAddress: null,
