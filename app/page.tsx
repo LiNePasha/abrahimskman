@@ -16,15 +16,14 @@ const VENDOR_ID = process.env.NEXT_PUBLIC_VENDOR_ID || '591';
 // Featured Categories from Store - Easy to Edit
 const featuredStoreCategories = [
   {
-    id: 421,
-    name: 'خوذة',
-    slug: 'motorcycle-safety-gear',
-    description: 'أفضل خوذة لموتوسيكلك',
-    icon: '🎒',
-    gradient: 'from-brand-500 to-amber-500',
+    id: 626,
+    name: 'انجن جارد',
+    slug: 'engine-guard',
+    description: 'حماية قوية لمحرك موتوسيكلك',
+    icon: '🪞',
+    gradient: 'from-amber-500 to-orange-500',
     productsCount: 8
   },
-
   {
     id: 428,
     name: 'مرايات',
@@ -37,13 +36,21 @@ const featuredStoreCategories = [
   {
     id: 425,
     name: 'مقابض',
-    slug: 'handles',
+    slug: 'grips',
     description: 'مقابض متينة ومريحة',
     icon: '🎮',
     gradient: 'from-brand-700 to-amber-600',
     productsCount: 8
   },
-
+{
+    id: 421,
+    name: 'خوذة',
+    slug: 'motorcycle-safety-gear',
+    description: 'أفضل خوذة لموتوسيكلك',
+    icon: '🎒',
+    gradient: 'from-brand-500 to-amber-500',
+    productsCount: 8
+  },
   {
     id: 454,
     name: 'شكمانات',
@@ -59,13 +66,13 @@ const featuredStoreCategories = [
 const heroSlides = [
   {
     id: 1,
-    image: 'https://api.spare2app.com/wp-content/uploads/2026/03/6003588772379346224-removebg-preview-1.png',
+    image: 'https://api.spare2app.com/wp-content/uploads/2026/03/kwwiwgazn8mz6z0bcary.png',
     title: 'انجن جارد Hogan',
     subtitle: 'F250 / H250 / L250 / V250',
-    oldPrice: 1450,
-    newPrice: 1200,
-    discount: 25,
-    savings: 250,
+    oldPrice: 950,
+    newPrice: 850,
+    discount: 10,
+    savings: 100,
     description: 'حماية قوية لمحرك موتوسيكلك - موجود جميع الألوان',
     colors: ['أبيض', 'أحمر', 'أخضر', 'أزرق', 'أسود', 'أصفر', 'رمادي'],
     ctaText: 'اطلب الآن',
