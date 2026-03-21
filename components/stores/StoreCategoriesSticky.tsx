@@ -4,6 +4,7 @@ import OptimizedImage from '@/components/ui/OptimizedImage'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
 interface Category {
   id: number
@@ -43,6 +44,7 @@ export default function StoreCategoriesSticky({
   const [expandedParents, setExpandedParents] = useState<Set<number>>(new Set())
   const [mobileExpandedParent, setMobileExpandedParent] = useState<number | null>(null)
   const [showAllCategoriesModal, setShowAllCategoriesModal] = useState(false)
+  const [isClient, setIsClient] = useState(false)
 
   // Build category tree with special handling for ID 365
   const buildCategoryTree = (): CategoryTree[] => {
@@ -130,6 +132,10 @@ export default function StoreCategoriesSticky({
     // Start with all categories collapsed
     setExpandedParents(new Set())
   }, [viewMode])
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   if (loading) {
     if (viewMode === 'horizontal') {
@@ -445,26 +451,27 @@ export default function StoreCategoriesSticky({
         </AnimatePresence>
 
         {/* All Categories Sidebar - Slides from Left */}
-        <AnimatePresence>
-          {showAllCategoriesModal && (
-            <>
-              {/* Backdrop */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="fixed inset-0 z-[100000] bg-black/50 backdrop-blur-sm"
-                onClick={() => setShowAllCategoriesModal(false)}
-              />
+        {isClient && createPortal(
+          <AnimatePresence>
+            {showAllCategoriesModal && (
+              <>
+                {/* Backdrop */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 z-[2147483645] bg-black/50 backdrop-blur-sm"
+                  onClick={() => setShowAllCategoriesModal(false)}
+                />
 
-              {/* Sidebar */}
-              <motion.div
-                initial={{ x: '-100%' }}
-                animate={{ x: 0 }}
-                exit={{ x: '-100%' }}
-                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                className="fixed right-0 top-[4rem] bottom-0 z-[100001] w-full sm:w-96 bg-white shadow-2xl overflow-hidden flex flex-col"
-              >
+                {/* Sidebar */}
+                <motion.div
+                  initial={{ x: '-100%' }}
+                  animate={{ x: 0 }}
+                  exit={{ x: '-100%' }}
+                  transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                  className="fixed right-0 top-0 bottom-0 z-[2147483646] w-full sm:w-96 bg-white shadow-2xl overflow-hidden flex flex-col"
+                >
                 {/* Header */}
                 <div className="flex-shrink-0 p-4 text-white bg-gradient-to-r from-brand-600 to-purple-600">
                   <div className="flex items-center justify-between">
@@ -661,10 +668,12 @@ export default function StoreCategoriesSticky({
                     إغلاق
                   </button>
                 </div>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
       </>
     )
   }

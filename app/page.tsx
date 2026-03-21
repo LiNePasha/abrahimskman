@@ -404,7 +404,7 @@ export default function HomePage() {
       </section>
 
       {/* Store Categories - Circular & Scrollable & Sticky */}
-      <section className="sticky z-40 border-b shadow-sm top-16 bg-white/95 backdrop-blur border-brand-100">
+      <section className="sticky z-40 border-b shadow-sm top-16 md:top-20 bg-white/95 backdrop-blur border-brand-100">
         <div className="px-0 mx-auto max-w-7xl sm:px-6 lg:px-8">
           {/* <h2 className="mb-3 text-base font-bold text-center text-gray-900 md:text-xl md:mb-4">تصفح حسب الفئة</h2> */}
           
