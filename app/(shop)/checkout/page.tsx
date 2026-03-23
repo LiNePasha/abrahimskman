@@ -96,8 +96,8 @@ const FIXED_PAYMENT_METHODS: PaymentMethod[] = [
     enabled: true,
     requiresProof: true,
     icon: '/vocash.webp',
-    accountNumber: process.env.NEXT_PUBLIC_INSTAPAY_ACCOUNT_NUMBER || '01025338973',
-    accountName: process.env.NEXT_PUBLIC_INSTAPAY_ACCOUNT_NAME || 'وليد أحمد',
+    accountNumber: process.env.NEXT_PUBLIC_INSTAPAY_ACCOUNT_NUMBER || '01118205873',
+    accountName: process.env.NEXT_PUBLIC_INSTAPAY_ACCOUNT_NAME || 'رشا ع*** ك***',
   }
 ]
 
@@ -164,8 +164,8 @@ export default function CheckoutPage() {
   })
   
   // Get vendor-specific Instapay info or use default
-  const instaPayAccount = vendorConfig?.instaPayAccount || process.env.NEXT_PUBLIC_INSTAPAY_ACCOUNT_NUMBER || '01025338973'
-  const instaPayName = vendorConfig?.instaPayName || process.env.NEXT_PUBLIC_INSTAPAY_ACCOUNT_NAME || 'وليد أحمد'
+  const instaPayAccount = vendorConfig?.instaPayAccount || process.env.NEXT_PUBLIC_INSTAPAY_ACCOUNT_NUMBER || '01118205873'
+  const instaPayName = vendorConfig?.instaPayName || process.env.NEXT_PUBLIC_INSTAPAY_ACCOUNT_NAME || 'رشا ع ك'
   const instaPayLink = vendorConfig?.instaPayLink || process.env.NEXT_PUBLIC_INSTAPAY_LINK || 'https://ipn.eg/S/ahmeedwaleed2004/instapay/0ct8h5'
 
   // Set Instapay as default payment method on mount (ALWAYS - it's the only option)
@@ -1479,7 +1479,7 @@ export default function CheckoutPage() {
                                 </div>
                                 
                                 {/* Instapay Link */}
-                                <div className="pt-3 border-t border-gray-200">
+                                {/* <div className="pt-3 border-t border-gray-200">
                                   <a
                                     href={instaPayLink}
                                     target="_blank"
@@ -1491,7 +1491,7 @@ export default function CheckoutPage() {
                                     </svg>
                                     ادفع عبر Instapay مباشرة
                                   </a>
-                                </div>
+                                </div> */}
                               
                                 {/* Order Breakdown */}
                                 <div className="pt-3 mt-3 space-y-2 border-t border-gray-200">

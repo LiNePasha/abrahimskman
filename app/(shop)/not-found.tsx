@@ -75,7 +75,7 @@ export default function ShopNotFound() {
           </p>
           <div className="flex justify-center gap-3 mt-4">
             <a
-              href="tel:01065333763"
+              href="tel:01118205873"
               className="text-sm font-medium text-green-600 transition-colors hover:text-green-700"
             >
               📞 اتصل بنا

@@ -4,12 +4,18 @@ export async function safeFetch<T>(
   options?: RequestInit
 ): Promise<{ data: T | null; error: string | null; status: number }> {
   try {
+    const isFormDataBody = options?.body instanceof FormData
+    const headers = new Headers(options?.headers)
+
+    if (isFormDataBody) {
+      headers.delete('Content-Type')
+    } else if (!headers.has('Content-Type')) {
+      headers.set('Content-Type', 'application/json')
+    }
+
     const response = await fetch(url, {
       ...options,
-      headers: {
-        'Content-Type': 'application/json',
-        ...options?.headers,
-      },
+      headers,
     })
 
     // Handle non-OK responses
@@ -39,13 +45,15 @@ export async function safeFetch<T>(
       error: null,
       status: response.status,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Network errors, timeout, etc.
     console.error('Fetch error:', error)
+
+    const errorMessage = error instanceof Error ? error.message : 'فشل الاتصال بالسيرفر'
     
     return {
       data: null,
-      error: error.message || 'فشل الاتصال بالسيرفر',
+      error: errorMessage,
       status: 0,
     }
   }
@@ -85,8 +93,8 @@ export async function fetchWithRetry<T>(
 
 // Validate API response structure
 export function validateResponse<T>(
-  data: any,
-  validator: (data: any) => data is T
+  data: unknown,
+  validator: (data: unknown) => data is T
 ): { valid: true; data: T } | { valid: false; error: string } {
   if (!data) {
     return { valid: false, error: 'لا توجد بيانات' }
@@ -100,13 +108,13 @@ export function validateResponse<T>(
 }
 
 // Type guard helpers
-export const isArrayWithItems = (arr: any): arr is any[] => {
+export const isArrayWithItems = (arr: unknown): arr is unknown[] => {
   return Array.isArray(arr) && arr.length > 0
 }
 
 export const hasProperty = <T extends object, K extends string>(
-  obj: T,
+  obj: unknown,
   key: K
 ): obj is T & Record<K, unknown> => {
-  return obj && typeof obj === 'object' && key in obj
+  return Boolean(obj) && typeof obj === 'object' && key in obj
 }

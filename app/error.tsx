@@ -36,7 +36,7 @@ export default function Error({
 
         {/* Error Details (in development) */}
         {process.env.NODE_ENV === 'development' && (
-          <div className="p-4 mx-auto mb-8 text-left bg-white border-2 border-red-200 rounded-xl max-w-md">
+          <div className="max-w-md p-4 mx-auto mb-8 text-left bg-white border-2 border-red-200 rounded-xl">
             <p className="mb-2 text-sm font-semibold text-red-700">
               📋 تفاصيل الخطأ (تظهر في التطوير فقط):
             </p>
@@ -73,19 +73,19 @@ export default function Error({
         </div>
 
         {/* Support Info */}
-        <div className="p-6 border-2 border-dashed border-gray-300 bg-white/50 backdrop-blur-sm rounded-2xl">
+        <div className="p-6 border-2 border-gray-300 border-dashed bg-white/50 backdrop-blur-sm rounded-2xl">
           <p className="mb-3 text-sm font-semibold text-gray-700">
             💬 محتاج مساعدة؟
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm">
             <a
-              href="tel:01065333763"
+              href="tel:01118205873"
               className="text-green-600 transition-colors hover:text-green-700 hover:underline"
             >
-              📞 اتصل بنا: 01065333763
+              📞 اتصل بنا: 01118205873
             </a>
             <a
-              href="mailto:ibrahimskmanweb@gmail.com"
+              href="mailto:modyshakman00@gmail.com"
               className="text-blue-600 transition-colors hover:text-blue-700 hover:underline"
             >
               ✉️ راسلنا

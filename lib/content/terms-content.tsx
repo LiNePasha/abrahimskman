@@ -90,7 +90,7 @@ export const TermsContent = () => {
         <div className="p-2.5 border-2 border-yellow-200 bg-yellow-50 rounded-lg md:p-3">
           <div className="space-y-1 text-xs">
             <p>📧 <a href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'spare2appeg@gmail.com'}`} className="underline text-brand-600">{process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'spare2appeg@gmail.com'}</a></p>
-            <p>📱 <a href={`tel:+2${process.env.NEXT_PUBLIC_CONTACT_PHONE || '01025338973'}`} className="underline text-brand-600">{process.env.NEXT_PUBLIC_CONTACT_PHONE || '01025338973'}</a></p>
+            <p>📱 <a href={`tel:+2${process.env.NEXT_PUBLIC_CONTACT_PHONE || '01118205873'}`} className="underline text-brand-600">{process.env.NEXT_PUBLIC_CONTACT_PHONE || '01118205873'}</a></p>
             <p>🕐 احنا موجودين 24 ساعة</p>
           </div>
         </div>

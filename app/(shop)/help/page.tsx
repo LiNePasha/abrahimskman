@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   keywords: 'مساعدة, دعم فني, خدمة العملاء, إبراهيم شكمان, قطع غيار موتوسيكلات',
 }
 
-const CONTACT_PHONE = process.env.NEXT_PUBLIC_CONTACT_PHONE || '01065333763'
+const CONTACT_PHONE = process.env.NEXT_PUBLIC_CONTACT_PHONE || '01118205873'
 const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'ibrahimskmanweb@gmail.com'
 
 export default function HelpPage() {

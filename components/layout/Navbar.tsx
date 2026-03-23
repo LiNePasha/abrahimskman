@@ -125,9 +125,9 @@ export default function NavbarNew() {
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-10 text-xs">
             <div className="flex items-center gap-6 text-gray-600">
-              <a href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE || '01065333763'}`} className="flex items-center gap-1.5 hover:text-primary-600 transition-colors">
+              <a href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE || '01118205873'}`} className="flex items-center gap-1.5 hover:text-primary-600 transition-colors">
                 <PhoneIcon className="w-4 h-4" />
-                <span className="font-medium">{process.env.NEXT_PUBLIC_CONTACT_PHONE || '01065333763'}</span>
+                <span className="font-medium">{process.env.NEXT_PUBLIC_CONTACT_PHONE || '01118205873'}</span>
               </a>
               <a href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'ibrahimskmanweb@gmail.com'}`} className="flex items-center gap-1.5 hover:text-primary-600 transition-colors">
                 <EnvelopeIcon className="w-4 h-4" />
@@ -536,9 +536,9 @@ export default function NavbarNew() {
 
               {/* Contact Info - Mobile */}
               <div className="px-4 py-4 space-y-2 border-t border-gray-200 bg-gray-50">
-                <a href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE || '01065333763'}`} className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-primary-600">
+                <a href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE || '01118205873'}`} className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-primary-600">
                   <PhoneIcon className="w-4 h-4" />
-                  <span>{process.env.NEXT_PUBLIC_CONTACT_PHONE || '01065333763'}</span>
+                  <span>{process.env.NEXT_PUBLIC_CONTACT_PHONE || '01118205873'}</span>
                 </a>
                 <a href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'ibrahimskmanweb@gmail.com'}`} className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-primary-600">
                   <EnvelopeIcon className="w-4 h-4" />

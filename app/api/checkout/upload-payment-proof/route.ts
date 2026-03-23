@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import { uploadPaymentProof } from '@/lib/api/cloudinary'
-import { requireAuth } from '@/lib/auth/server'
 import type { CloudinaryUploadResponse, PaymentProof } from '@/types'
 
 /**
@@ -17,6 +16,22 @@ export async function POST(request: Request) {
   try {
     // Guest checkout allowed - no auth required
     // await requireAuth()
+
+    const contentType = request.headers.get('content-type') || ''
+    const isSupportedContentType =
+      contentType.includes('multipart/form-data') ||
+      contentType.includes('application/x-www-form-urlencoded')
+
+    if (!isSupportedContentType) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'نوع الطلب غير صحيح',
+          message: 'يجب رفع الصورة باستخدام نموذج multipart/form-data',
+        },
+        { status: 400 }
+      )
+    }
 
     // Parse form data
     const formData = await request.formData()

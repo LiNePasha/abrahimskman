@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 
 const FACEBOOK_URL = process.env.NEXT_PUBLIC_FACEBOOK_URL || 'https://www.facebook.com/ibrahimskman'
 const TIKTOK_URL = process.env.NEXT_PUBLIC_TIKTOK_URL || 'https://www.tiktok.com/@ibrahim_shkman'
-const CONTACT_PHONE = process.env.NEXT_PUBLIC_CONTACT_PHONE || '01025338973'
+const CONTACT_PHONE = process.env.NEXT_PUBLIC_CONTACT_PHONE || '01118205873'
 const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'spare2appeg@gmail.com'
 const VENDOR_NAME = process.env.NEXT_PUBLIC_VENDOR_NAME || 'إبراهيم شكمان'
 

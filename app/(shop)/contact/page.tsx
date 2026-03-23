@@ -16,8 +16,8 @@ export default function ContactPage() {
     {
       icon: PhoneIcon,
       title: 'رقم الهاتف',
-      value: process.env.NEXT_PUBLIC_CONTACT_PHONE || '01065333763',
-      href: `tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE || '01065333763'}`,
+      value: process.env.NEXT_PUBLIC_CONTACT_PHONE || '01118205873',
+      href: `tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE || '01118205873'}`,
       color: 'from-green-500 to-emerald-600',
       bgColor: 'bg-green-50',
       borderColor: 'border-green-200',
@@ -26,8 +26,8 @@ export default function ContactPage() {
     {
       icon: EnvelopeIcon,
       title: 'البريد الإلكتروني',
-      value: process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'ibrahimskmanweb@gmail.com',
-      href: `mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'ibrahimskmanweb@gmail.com'}`,
+      value: process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'modyshakman00@gmail.com',
+      href: `mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'modyshakman00@gmail.com'}`,
       color: 'from-blue-500 to-indigo-600',
       bgColor: 'bg-blue-50',
       borderColor: 'border-blue-200',
@@ -140,7 +140,7 @@ export default function ContactPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              href={`https://wa.me/${process.env.NEXT_PUBLIC_CONTACT_PHONE?.replace(/\D/g, '') || '01065333763'}`}
+              href={`https://wa.me/${process.env.NEXT_PUBLIC_CONTACT_PHONE?.replace(/\D/g, '') || '01118205873'}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-3 p-6 font-bold text-white transition-all duration-300 shadow-xl bg-gradient-to-r from-green-500 to-green-600 rounded-2xl hover:from-green-600 hover:to-green-700 hover:scale-105"
@@ -172,7 +172,7 @@ export default function ContactPage() {
                 <h3 className="mb-2 text-xl font-bold text-gray-900">اتصل بنا الآن</h3>
                 <p className="mb-4 text-gray-600">تحدث مباشرة مع فريق خدمة العملاء</p>
                 <a
-                  href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE || '01065333763'}`}
+                  href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE || '01118205873'}`}
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 font-bold text-white transition-all duration-300 shadow-lg bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl hover:from-green-600 hover:to-emerald-700 hover:scale-105"
                 >
                   <PhoneIcon className="w-5 h-5" />

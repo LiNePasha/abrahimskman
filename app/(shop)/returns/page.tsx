@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   keywords: 'سياسة الإرجاع, استبدال المنتجات, استرجاع المبلغ, ضمان المنتجات',
 }
 
-const CONTACT_PHONE = process.env.NEXT_PUBLIC_CONTACT_PHONE || '01065333763'
+const CONTACT_PHONE = process.env.NEXT_PUBLIC_CONTACT_PHONE || '01118205873'
 
 export default function ReturnsPage() {
   return (
     <div className="min-h-screen py-12 bg-gray-50" dir="rtl">
-      <div className="px-4 mx-auto max-w-4xl sm:px-6 lg:px-8">
+      <div className="max-w-4xl px-4 mx-auto sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="mb-12 text-center">
@@ -38,7 +38,7 @@ export default function ReturnsPage() {
               مدة الإرجاع
             </h2>
             <div className="p-6 border-r-4 bg-brand-50 border-brand-500 rounded-xl">
-              <p className="text-lg font-semibold text-gray-900 mb-2">
+              <p className="mb-2 text-lg font-semibold text-gray-900">
                 يمكنك إرجاع المنتج خلال <span className="text-brand-600">7 أيام</span> من تاريخ الاستلام
               </p>
               <p className="text-gray-700">
@@ -224,7 +224,7 @@ export default function ReturnsPage() {
               </a>
               <Link 
                 href="/help"
-                className="px-8 py-3 font-bold transition-all border-2 border-white rounded-xl text-white hover:bg-white hover:text-gray-900"
+                className="px-8 py-3 font-bold text-white transition-all border-2 border-white rounded-xl hover:bg-white hover:text-gray-900"
               >
                 📚 مركز المساعدة
               </Link>

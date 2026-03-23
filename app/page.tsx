@@ -51,15 +51,6 @@ const featuredStoreCategories = [
     gradient: 'from-brand-500 to-amber-500',
     productsCount: 8
   },
-  {
-    id: 454,
-    name: 'شكمانات',
-    slug: 'exhaust',
-    description: 'شكمانات بوم بوم',
-    icon: '💨',
-    gradient: 'from-brand-600 to-brand-500',
-    productsCount: 8
-  },
 ];
 
 // Hero Slides - Hot Deals
