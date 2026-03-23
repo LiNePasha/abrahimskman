@@ -116,5 +116,5 @@ export const hasProperty = <T extends object, K extends string>(
   obj: unknown,
   key: K
 ): obj is T & Record<K, unknown> => {
-  return Boolean(obj) && typeof obj === 'object' && key in obj
+  return obj !== null && typeof obj === 'object' && key in (obj as Record<string, unknown>)
 }
