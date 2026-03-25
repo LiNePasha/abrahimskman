@@ -58,25 +58,37 @@ export default function CheckoutSuccessPage({
   
   // State for order details
   const [sellerName, setSellerName] = useState('متجر غير محدد')
-  const [totalPay, setTotalPay] = useState('0')
+  const [productsAmount, setProductsAmount] = useState('0')
+  const [shippingAmount, setShippingAmount] = useState('0')
+  const [walletFeeAmount, setWalletFeeAmount] = useState('0')
+  const [totalPaid, setTotalPaid] = useState('0')
   const paymentMethod = getOrderDetail('paymentMethod', 'cash')
   const deliveryType = getOrderDetail('deliveryType', 'home_delivery')
   const storeAddress = searchParams.get('storeAddress') || ''
   const googleMapsLink = searchParams.get('googleMapsLink') || ''
   
   useEffect(() => {
-    // Update seller name and total from URL params or localStorage
-    console.log('📋 URL params:', {
-      sellerName: searchParams.get('sellerName'),
-      totalPay: searchParams.get('totalPay')
+    // Get exact amounts from URL (these are what user actually paid from checkout)
+    const urlProductsAmount = searchParams.get('productsAmount') || '0'
+    const urlShippingAmount = searchParams.get('shippingAmount') || '0'
+    const urlWalletFee = searchParams.get('walletFee') || '0'
+    const urlTotalPay = searchParams.get('totalPay') || '0'
+    
+    console.log('💰 Payment amounts from checkout:', {
+      productsAmount: urlProductsAmount,
+      shippingAmount: urlShippingAmount,
+      walletFee: urlWalletFee,
+      totalPay: urlTotalPay
     })
     
+    // Update seller name and amounts from URL/localStorage
     const initialSellerName = getOrderDetail('sellerName', 'متجر غير محدد')
-    const initialTotalPay = getOrderDetail('totalPay', '0')
     
-    console.log('✅ Initial values:', { initialSellerName, initialTotalPay })
     setSellerName(initialSellerName)
-    setTotalPay(initialTotalPay)
+    setProductsAmount(urlProductsAmount)
+    setShippingAmount(urlShippingAmount)
+    setWalletFeeAmount(urlWalletFee)
+    setTotalPaid(urlTotalPay)
     
     // Trigger confetti animation
     confetti({
@@ -85,17 +97,17 @@ export default function CheckoutSuccessPage({
       origin: { y: 0.6 },
     })
     
-    // Fetch order details from WooCommerce
+    // Fetch order details from WooCommerce (for validation & status only, not for amounts)
     const fetchOrderDetails = async () => {
       try {
-        console.log('🔍 Fetching order details for order:', orderId)
+        console.log('🔍 Fetching order details for validation:', orderId)
         const response = await fetch(`/api/orders/${orderId}`)
         const data = await response.json()
         
         if (data.success && data.order) {
-          console.log('✅ Order details fetched:', data.order)
+          console.log('✅ Order fetched for validation:', data.order)
           
-          // Update order state
+          // Update order state only
           setOrder({
             id: data.order.id,
             orderNumber: `#${data.order.id}`,
@@ -104,20 +116,8 @@ export default function CheckoutSuccessPage({
             currency: 'EGP',
             dateCreated: data.order.dateCreated,
           })
-          
-          // ✅ Update seller name and total from API
-          if (data.order.vendorName) {
-            console.log('✅ Updating seller name from API:', data.order.vendorName)
-            setSellerName(data.order.vendorName)
-          }
-          
-          // Calculate products total (total - shipping)
-          const productsTotal = data.order.total - (data.order.shippingTotal || 0)
-          console.log('✅ Updating total from API:', productsTotal)
-          setTotalPay(productsTotal.toFixed(2))
-          
         } else {
-          console.warn('⚠️ Could not fetch order details, using URL/localStorage values')
+          console.warn('⚠️ Could not fetch order details')
           setOrder({
             id: parseInt(orderId),
             orderNumber: `#${orderId}`,
@@ -337,29 +337,43 @@ export default function CheckoutSuccessPage({
           {/* Info Cards Grid - Hidden in screenshots */}
           {!capturing && (
             <div className="grid grid-cols-2 gap-4 mb-8 text-right" dir="rtl">
-              {/* Total Amount */}
-              <div className="p-4 rounded-lg bg-gray-50" dir="rtl">
+              {/* Products Amount */}
+              <div className="p-4 border-2 border-blue-200 rounded-lg bg-blue-50" dir="rtl">
                 <div className="flex items-center gap-2 mb-2" dir="rtl">
-                  <h3 className="font-semibold text-gray-900">المبلغ الإجمالي</h3>
-                  <ReceiptPercentIcon className="w-5 h-5 text-green-500" />
+                  <h3 className="font-semibold text-gray-900">مبلغ المنتجات</h3>
+                  <ReceiptPercentIcon className="w-5 h-5 text-blue-500" />
                 </div>
-                <p className="text-lg font-bold text-gray-900" dir="rtl">{parseFloat(totalPay).toFixed(2)} جنيه</p>
+                <p className="text-lg font-bold text-gray-900" dir="rtl">{parseFloat(productsAmount).toFixed(2)} جنيه</p>
               </div>
               
-              {/* Shipping */}
-              <div className="p-4 rounded-lg bg-gray-50" dir="rtl">
-                <div className="flex items-center gap-2 mb-2" dir="rtl">
-                  <h3 className="font-semibold text-gray-900">الشحن</h3>
-                  <TruckIcon className="w-5 h-5 text-blue-500" />
+              {/* Shipping Amount */}
+              {parseFloat(shippingAmount) > 0 && (
+                <div className="p-4 border-2 rounded-lg bg-amber-50 border-amber-200" dir="rtl">
+                  <div className="flex items-center gap-2 mb-2" dir="rtl">
+                    <h3 className="font-semibold text-gray-900">رسوم الشحن</h3>
+                    <TruckIcon className="w-5 h-5 text-amber-500" />
+                  </div>
+                  <p className="text-lg font-bold text-gray-900" dir="rtl">{parseFloat(shippingAmount).toFixed(2)} جنيه</p>
                 </div>
-                <p className="text-sm text-gray-600" dir="rtl">سيتم التوصيل قريباً</p>
-              </div>
+              )}
+              
+              {/* Wallet Fee (if any) */}
+              {parseFloat(walletFeeAmount) > 0 && (
+                <div className="p-4 border-2 border-purple-200 rounded-lg bg-purple-50" dir="rtl">
+                  <div className="flex items-center gap-2 mb-2" dir="rtl">
+                    <h3 className="font-semibold text-gray-900">رسوم الدفع</h3>
+                    <ReceiptPercentIcon className="w-5 h-5 text-purple-500" />
+                  </div>
+                  <p className="text-lg font-bold text-gray-900" dir="rtl">{parseFloat(walletFeeAmount).toFixed(2)} جنيه</p>
+                </div>
+              )}
+              
               
               {/* Payment Method */}
-              <div className="col-span-2 p-4 rounded-lg bg-gray-50" dir="rtl">
+              <div className="p-4 rounded-lg bg-gray-50" dir="rtl">
                 <div className="flex items-center gap-2 mb-2" dir="rtl">
                   <h3 className="font-semibold text-gray-900">طريقة الدفع</h3>
-                  <ReceiptPercentIcon className="w-5 h-5 text-amber-500" />
+                  <ReceiptPercentIcon className="w-5 h-5 text-gray-600" />
                 </div>
                 <p className="text-sm text-gray-600" dir="rtl">
                   {paymentMethod === 'cash' ? '💵 الدفع عند الاستلام' : '💳 الدفع الإلكتروني'}
@@ -414,7 +428,7 @@ export default function CheckoutSuccessPage({
                           href={googleMapsLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="font-semibold underline text-blue-600 hover:text-blue-800 decoration-2 underline-offset-2"
+                          className="font-semibold text-blue-600 underline hover:text-blue-800 decoration-2 underline-offset-2"
                         >
                           {googleMapsLink}
                         </a>
@@ -460,7 +474,7 @@ export default function CheckoutSuccessPage({
             <button
               onClick={handleScreenshotAndShare}
               disabled={capturing}
-              className="flex items-center justify-center gap-2 px-6 py-3 font-semibold text-white transition-all rounded-lg bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+              className="flex items-center justify-center gap-2 px-6 py-3 font-semibold text-white transition-all rounded-lg shadow-lg bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-xl"
             >
               {capturing ? (
                 <>

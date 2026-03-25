@@ -705,12 +705,16 @@ export default function CheckoutPage() {
           : (firstProduct?.vendor?.store_address as { street_1?: string })?.street_1 || ''
         const googleMapsLink = firstProduct?.vendor?.social_links?.gplus || ''
         
-        // Prepare success page params
+        // Prepare success page params - SEND EXACT AMOUNTS PAID
+        const shippingCost = checkoutData.shippingMethod?.cost || 0
         const successParams = new URLSearchParams({
-          totalPay: result.paymentProof?.amount || totalAmount.toString(),
+          productsAmount: totalPrice.toString(), // Original product total
+          shippingAmount: shippingCost.toString(), // Shipping cost
+          walletFee: walletFee.toString(), // Payment fees (if any)
+          totalPay: totalAmount.toString(), // What user actually paid
           paymentMethod: paymentMethod.title,
           sellerName: sellerName,
-          deliveryType: checkoutData.deliveryType || 'home_delivery', // Add delivery type
+          deliveryType: checkoutData.deliveryType || 'home_delivery',
         })
         
         // Add optional params
@@ -1693,7 +1697,7 @@ export default function CheckoutPage() {
               onClick={() => setShowOrderSummary(!showOrderSummary)}
               className="w-full px-4 py-3 mb-3 text-sm font-semibold text-center transition-all border-2 border-gray-300 bg-gray-50 hover:bg-gray-100 rounded-xl"
             >
-              <span className="flex items-center justify-center gap-2">
+              <span className="flex items-center justify-center gap-2 text-black">
                 {showOrderSummary ? (
                   <>
                     <ChevronDownIcon className="w-5 h-5" />
