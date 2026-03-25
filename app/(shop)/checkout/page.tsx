@@ -903,37 +903,18 @@ export default function CheckoutPage() {
           {/* Main Content - 2 columns */}
           <div className="space-y-6 lg:col-span-2">
             
-            {/* 1. Delivery Type Selection - FIRST - ENHANCED */}
+            {/* 1. Delivery Type Selection - COMPACT */}
             <section 
               id="delivery-type-section"
-              className="relative p-4 overflow-hidden transition-all duration-300 border-2 shadow-lg bg-gradient-to-br from-white via-brand-50/30 to-white md:p-8 rounded-2xl hover:shadow-2xl border-brand-200 animate-fade-in"
+              className="p-4 transition-all bg-white border-2 border-gray-200 shadow-md rounded-xl hover:shadow-lg"
             >
-              {/* Animated Background Gradient */}
-              <div className="absolute inset-0 opacity-50 bg-gradient-to-r from-brand-100/20 via-purple-100/20 to-brand-100/20 animate-pulse"></div>
-              
-              {/* Spotlight Effect */}
-              <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-30 bg-gradient-to-br from-brand-400 to-transparent blur-3xl animate-pulse"></div>
-              
-              <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="relative">
-                    <div className="absolute inset-0 rounded-full animate-ping bg-brand-400 opacity-20"></div>
-                    <div className="relative flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-gradient-to-br from-brand-500 to-brand-600 animate-bounce-slow">
-                      <TruckIcon className="text-white w-7 h-7 drop-shadow-lg" />
-                    </div>
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-bold text-transparent md:text-3xl bg-gradient-to-r from-brand-600 to-brand-800 bg-clip-text">
-                      طريقة الاستلام
-                    </h2>
-                    <p className="text-sm text-gray-600 md:text-base animate-fade-in">
-                      🎯 اختر كيف تريد استلام طب
-                    </p>
-                  </div>
-                </div>
-              
-              {/* Delivery Type Selection - Enhanced Cards */}
-              <div className="grid grid-cols-2 gap-3 md:gap-6">
+              <div className="flex items-center gap-2 mb-3">
+                <TruckIcon className="w-5 h-5 text-brand-600" />
+                <h2 className="text-base font-bold text-gray-900">طريقة الاستلام</h2>
+              </div>
+            
+              {/* Delivery Type Selection - Compact Cards */}
+              <div className="grid grid-cols-2 gap-2">
                 {/* Home Delivery */}
                 <button
                   onClick={() => {
@@ -947,57 +928,36 @@ export default function CheckoutPage() {
                     }))
                   }}
                   className={`
-                    group relative p-4 md:p-6 rounded-xl md:rounded-2xl border-2 text-center transition-all duration-300
-                    transform hover:scale-105 hover:-translate-y-1
+                    relative p-3 rounded-lg border-2 text-center transition-all duration-200
                     ${checkoutData.deliveryType === 'home_delivery' || !checkoutData.deliveryType
-                      ? 'border-brand-500 bg-gradient-to-br from-brand-50 to-brand-100 shadow-xl ring-4 ring-brand-200/50'
-                      : 'border-gray-200 bg-white hover:border-brand-300 hover:shadow-lg'
+                      ? 'border-brand-500 bg-brand-50 shadow-md'
+                      : 'border-gray-200 bg-white hover:border-brand-300 hover:bg-gray-50'
                     }
                   `}
                 >
-                  {/* Selected Badge */}
                   {(checkoutData.deliveryType === 'home_delivery' || !checkoutData.deliveryType) && (
-                    <div className="absolute flex items-center gap-1 px-2 py-1 text-xs font-bold text-white rounded-full shadow-lg -top-2 -right-2 bg-gradient-to-r from-green-500 to-green-600 animate-bounce-slow">
-                      <CheckCircleIcon className="w-3 h-3" />
-                      مختار
+                    <div className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4 bg-green-500 rounded-full">
+                      <CheckCircleIcon className="w-3 h-3 text-white" />
                     </div>
                   )}
                   
-                  <div className="flex flex-col items-center gap-3">
-                    <div className={`
-                      relative p-3 md:p-4 rounded-2xl transition-all duration-300
+                  <div className="flex flex-col items-center gap-1">
+                    <TruckIcon className={`
+                      w-5 h-5 transition-colors
                       ${checkoutData.deliveryType === 'home_delivery' || !checkoutData.deliveryType 
-                        ? 'bg-gradient-to-br from-brand-500 to-brand-600 shadow-lg scale-110' 
-                        : 'bg-gray-100 group-hover:bg-brand-100'
+                        ? 'text-brand-600' 
+                        : 'text-gray-500'
+                      }
+                    `} />
+                    <h3 className={`
+                      text-xs font-semibold transition-colors
+                      ${checkoutData.deliveryType === 'home_delivery' || !checkoutData.deliveryType
+                        ? 'text-brand-700'
+                        : 'text-gray-700'
                       }
                     `}>
-                      {/* Icon Glow Effect */}
-                      {(checkoutData.deliveryType === 'home_delivery' || !checkoutData.deliveryType) && (
-                        <div className="absolute inset-0 rounded-2xl animate-ping bg-brand-400 opacity-30"></div>
-                      )}
-                      <TruckIcon className={`
-                        relative w-8 h-8 md:w-10 md:h-10 transition-all duration-300
-                        ${checkoutData.deliveryType === 'home_delivery' || !checkoutData.deliveryType 
-                          ? 'text-white drop-shadow-lg' 
-                          : 'text-gray-600 group-hover:text-brand-600'
-                        }
-                      `} />
-                    </div>
-                    
-                    <div>
-                      <h3 className={`
-                        text-sm md:text-lg font-bold transition-colors duration-300
-                        ${checkoutData.deliveryType === 'home_delivery' || !checkoutData.deliveryType
-                          ? 'text-brand-700'
-                          : 'text-gray-900 group-hover:text-brand-600'
-                        }
-                      `}>
-                        🏠 توصيل للمنزل
-                      </h3>
-                      <p className="mt-1 text-xs text-gray-500 md:text-sm">
-                        توصيل سريع وآمن
-                      </p>
-                    </div>
+                      🏠 توصيل المنزل
+                    </h3>
                   </div>
                 </button>
                 
@@ -1019,66 +979,39 @@ export default function CheckoutPage() {
                     }))
                   }}
                   className={`
-                    group relative p-4 md:p-6 rounded-xl md:rounded-2xl border-2 text-center transition-all duration-300
-                    transform hover:scale-105 hover:-translate-y-1
+                    relative p-3 rounded-lg border-2 text-center transition-all duration-200
                     ${checkoutData.deliveryType === 'store_pickup'
-                      ? 'border-brand-500 bg-gradient-to-br from-brand-50 to-brand-100 shadow-xl ring-4 ring-brand-200/50'
-                      : 'border-gray-200 bg-white hover:border-brand-300 hover:shadow-lg'
+                      ? 'border-brand-500 bg-brand-50 shadow-md'
+                      : 'border-gray-200 bg-white hover:border-brand-300 hover:bg-gray-50'
                     }
                   `}
                 >
-                  {/* Selected Badge */}
                   {checkoutData.deliveryType === 'store_pickup' && (
-                    <div className="absolute flex items-center gap-1 px-2 py-1 text-xs font-bold text-white rounded-full shadow-lg -top-2 -right-2 bg-gradient-to-r from-green-500 to-green-600 animate-bounce-slow">
-                      <CheckCircleIcon className="w-3 h-3" />
-                      مختار
+                    <div className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4 bg-green-500 rounded-full">
+                      <CheckCircleIcon className="w-3 h-3 text-white" />
                     </div>
                   )}
                   
-                  {/* Free Badge */}
-                  {/* <div className="absolute flex items-center gap-1 px-2 py-1 text-xs font-bold text-white rounded-full shadow-lg -top-2 -left-2 bg-gradient-to-r from-green-500 to-green-600">
-                    ✨ مجاني
-                  </div> */}
-                  
-                  <div className="flex flex-col items-center gap-3">
-                    <div className={`
-                      relative p-3 md:p-4 rounded-2xl transition-all duration-300
+                  <div className="flex flex-col items-center gap-1">
+                    <MapPinIcon className={`
+                      w-5 h-5 transition-colors
                       ${checkoutData.deliveryType === 'store_pickup' 
-                        ? 'bg-gradient-to-br from-brand-500 to-brand-600 shadow-lg scale-110' 
-                        : 'bg-gray-100 group-hover:bg-brand-100'
+                        ? 'text-brand-600' 
+                        : 'text-gray-500'
+                      }
+                    `} />
+                    <h3 className={`
+                      text-xs font-semibold transition-colors
+                      ${checkoutData.deliveryType === 'store_pickup'
+                        ? 'text-brand-700'
+                        : 'text-gray-700'
                       }
                     `}>
-                      {/* Icon Glow Effect */}
-                      {checkoutData.deliveryType === 'store_pickup' && (
-                        <div className="absolute inset-0 rounded-2xl animate-ping bg-brand-400 opacity-30"></div>
-                      )}
-                      <MapPinIcon className={`
-                        relative w-8 h-8 md:w-10 md:h-10 transition-all duration-300
-                        ${checkoutData.deliveryType === 'store_pickup' 
-                          ? 'text-white drop-shadow-lg' 
-                          : 'text-gray-600 group-hover:text-brand-600'
-                        }
-                      `} />
-                    </div>
-                    
-                    <div>
-                      <h3 className={`
-                        text-sm md:text-lg font-bold transition-colors duration-300
-                        ${checkoutData.deliveryType === 'store_pickup'
-                          ? 'text-brand-700'
-                          : 'text-gray-900 group-hover:text-brand-600'
-                        }
-                      `}>
-                        🏪 استلام من المتجر
-                      </h3>
-                      <p className="mt-1 text-xs text-gray-500 md:text-sm">
-                        وفّر رسوم الشحن
-                      </p>
-                    </div>
+                      🏪 استلام المتجر
+                    </h3>
                   </div>
                 </button>
               </div>
-            </div>
             </section>
 
             {/* Electrical Products Warning */}
