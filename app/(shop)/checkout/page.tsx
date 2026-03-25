@@ -936,7 +936,7 @@ export default function CheckoutPage() {
                   `}
                 >
                   {(checkoutData.deliveryType === 'home_delivery' || !checkoutData.deliveryType) && (
-                    <div className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4 bg-green-500 rounded-full">
+                    <div className="absolute flex items-center justify-center w-4 h-4 bg-green-500 rounded-full -top-1 -right-1">
                       <CheckCircleIcon className="w-3 h-3 text-white" />
                     </div>
                   )}
@@ -987,7 +987,7 @@ export default function CheckoutPage() {
                   `}
                 >
                   {checkoutData.deliveryType === 'store_pickup' && (
-                    <div className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4 bg-green-500 rounded-full">
+                    <div className="absolute flex items-center justify-center w-4 h-4 bg-green-500 rounded-full -top-1 -right-1">
                       <CheckCircleIcon className="w-3 h-3 text-white" />
                     </div>
                   )}
