@@ -343,7 +343,7 @@ export default function CheckoutSuccessPage({
                   <h3 className="font-semibold text-gray-900">مبلغ المنتجات</h3>
                   <ReceiptPercentIcon className="w-5 h-5 text-blue-500" />
                 </div>
-                <p className="text-lg font-bold text-gray-900" dir="rtl">{parseFloat(productsAmount).toFixed(2)} جنيه</p>
+                <p className="text-sm font-bold text-gray-900" dir="rtl">{parseFloat(productsAmount).toFixed(2)} جنيه</p>
               </div>
               
               {/* Shipping Amount */}
@@ -353,7 +353,7 @@ export default function CheckoutSuccessPage({
                     <h3 className="font-semibold text-gray-900">رسوم الشحن</h3>
                     <TruckIcon className="w-5 h-5 text-amber-500" />
                   </div>
-                  <p className="text-lg font-bold text-gray-900" dir="rtl">{parseFloat(shippingAmount).toFixed(2)} جنيه</p>
+                  <p className="text-lg font-bold text-gray-900" dir="rtl">من {parseFloat(shippingAmount) - 20 < 0 ? '0' : (parseFloat(shippingAmount) - 20).toFixed(2)} ل {(parseFloat(shippingAmount) + 20).toFixed(2)} جنيه</p>
                 </div>
               )}
               
