@@ -150,7 +150,8 @@ export default function CheckoutPage() {
 
   // Vendor-specific customizations - Get config from array
   // Ensure vendorId is always a number for proper comparison
-  const rawVendorId = cartItems[0]?.vendor?.id
+  // Try to get from cart items first, fallback to env variable for single vendor setup
+  const rawVendorId = cartItems[0]?.vendor?.id || process.env.NEXT_PUBLIC_VENDOR_ID
   const vendorId = rawVendorId ? (typeof rawVendorId === 'string' ? parseInt(rawVendorId) : rawVendorId) : null
   const vendorConfig = VENDOR_CONFIGS.find(config => config.vendorId === vendorId)
   const isHalfPayment = vendorConfig?.paymentType === 'half_payment'
@@ -563,8 +564,8 @@ export default function CheckoutPage() {
 
     try {
       // Get vendor ID from first product (all products in cart must be from same vendor)
-      // Ensure vendorId is always a number for proper comparison
-      const rawVendorIdInOrder = cartItems[0]?.vendor?.id
+      // Fallback to env variable for single vendor setup
+      const rawVendorIdInOrder = cartItems[0]?.vendor?.id || process.env.NEXT_PUBLIC_VENDOR_ID
       const vendorIdInOrder = rawVendorIdInOrder ? (typeof rawVendorIdInOrder === 'string' ? parseInt(rawVendorIdInOrder) : rawVendorIdInOrder) : null
       
       console.log('🛒 DEBUG - Cart items:', cartItems)

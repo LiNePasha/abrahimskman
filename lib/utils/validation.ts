@@ -244,7 +244,7 @@ export const createOrderRequestSchema = z.object({
   
   totalWeight: z.number().min(0.1, 'الوزن الكلي مطلوب'),
   
-  vendorId: z.number().int().positive().optional(), // Vendor ID for parent_id
+  vendorId: z.number().int().positive().nullable().optional(), // Vendor ID for parent_id - Allow null for guest/single vendor orders
 })
 
 // ============================================
