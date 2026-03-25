@@ -1473,7 +1473,7 @@ export default function CheckoutPage() {
                                   <div></div>
                                 ) : (
                                   <div className="p-2 mt-3 text-xs text-blue-700 rounded bg-blue-50">
-                                    💡 الشحن في حدود ({checkoutData.shippingMethod ? `${Math.round(checkoutData.shippingMethod.cost) -30} ل ${Math.round(checkoutData.shippingMethod.cost)}` : 0} جنيه) يُدفع نقداً عند الاستلام
+                                    💡 الشحن في حدود ({checkoutData.shippingMethod ? `${Math.round(checkoutData.shippingMethod.cost) -20} ل ${Math.round(checkoutData.shippingMethod.cost) + 20}` : 0} جنيه) يُدفع نقداً عند الاستلام
                                   </div>
                                 )}
                               </div>
